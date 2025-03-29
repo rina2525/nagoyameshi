@@ -18,7 +18,7 @@ import com.example.taberogu.repository.CategoryRepository;
 import com.example.taberogu.repository.RestaurantRepository;
 
 @Controller
-@RequestMapping("/restaurant")
+@RequestMapping("/")
 public class RestaurantController {
 	@Autowired
     private CategoryRepository categoryRepository;
@@ -35,27 +35,35 @@ public class RestaurantController {
         List<Category> categories = categoryRepository.findAll();
         model.addAttribute("categories", categories);
         
-     // ページネーションの設定
-        Pageable pageable = PageRequest.of(page, size);
-        
-        // categoryId が null でなければ、その ID に関連するレストランを取得
-        Page<Restaurant> restaurantPage = (categoryId != null) ? restaurantRepository.findBycategory_id(categoryId, pageable) 
-        		: restaurantRepository.findAll(pageable);
-        
+     //検索条件が空なら検索を実行せずリストを返す
+        Page<Restaurant>restaurantPage;
+        if(categoryId == null) {
+        	restaurantPage = Page.empty();
+        }else {
+        	Pageable pageable = PageRequest.of(page,size);
+        	restaurantPage = restaurantRepository.findBycategory_id(categoryId, pageable);
+        }
        
-        
-        
         model.addAttribute("restaurantPage", restaurantPage);
         model.addAttribute("restaurant", restaurantPage.getContent()); // 実際のデータ
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", restaurantPage.getTotalPages());
 
-        return "restaurant/index";
+        return "index";
         
+       
         
     }
     
+    @GetMapping("/terms")
+    public String showTerms() {
+    	return "terms";
+    }
     
+    @GetMapping("/company")
+    public String showCompany() {
+    	return "company";
+    }
 
     
 

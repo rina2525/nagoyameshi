@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<!--部品の共通化-->
+	<div th:replace="~{fragment :: meta}"></div>
+	<!--部品の共通化-->
+	<div th:replace="~{fragment :: styles}"></div>
+	<title>会社概要</title>
+</head>
+
+<body>
+	<div class="taberogu-wrapper">
+
+		<!--ヘッダー-->
+		<!--部品の共通化-->
+		<div th:replace="~{fragment :: header}"></div>
+
+		<main>
+			<div class="terms-center">
+				<h1>会社概要</h1>
+				
+				<h2>会社名</h2>
+				<p>NAGOYAMESHI</p>
+
+				<h2>代表取締役</h2>
+				<p>侍太郎</p>
+
+				<h2>設立</h2>
+				<p>2025年３月２６日</p>
+
+
+				<h2>資本金</h2>
+				<p>70百万円</p>
+				
+				<h2>事業内容</h2>
+				
+					<p>1)店舗予約</p>
+					<p>2)店舗レビュー投稿</p>
+				
+			</div>
+
+			<a th:href="@{/}">トップページへ戻る</a>
+		</main>
+	</div>
+</body>
+</html>
